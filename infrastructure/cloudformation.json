@@ -1,0 +1,82 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS Machine Learning: Binary Classification",
+    "Parameters": {
+        "Region": {
+            "Type": "String",
+            "Default": "us-west-2"
+        }
+    },
+    "Mappings": {
+        "SubnetConfig": {
+        "UserConfig": {
+            "Login": {
+                "Name": "student",
+                "Pass": "password"
+            }
+        }
+    },
+    "Resources": {
+        "Group": {
+            "Type": "AWS::IAM::Group",
+            "Properties": {
+                "GroupName": "Students",
+                "Path": "/",
+                "Policies": [
+                    {
+                        "PolicyName": "students-policy",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Action": [
+                                        "machinelearning:Describe*",
+                                        "machinelearning:Get*",
+                                        "machinelearning:CreateEvaluation",
+                                        "machinelearning:UpdateEvaluation",
+                                        "machinelearning:DeleteEvaluation",
+                                        "machinelearning:CreateDataSourceFromS3",
+                                        "machinelearning:DeleteDataSource",
+                                        "machinelearning:UpdateDataSource",
+                                        "machinelearning:CreateMLModel",
+                                        "machinelearning:UpdateMLModel",
+                                        "machinelearning:DeleteMLModel",
+                                        "machinelearning:AddTags",
+                                        "machinelearning:DeleteTags"
+                                    ],
+                                    "Resource": "*",
+                                    "Effect": "Allow"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "User": {
+            "Type": "AWS::IAM::User",
+            "Properties": {
+                "LoginProfile": {
+                    "Password": {
+                        "Fn::FindInMap": [
+                            "UserConfig",
+                            "Login",
+                            "Pass"
+                        ]
+                    }
+                },
+                "Path": "/",
+                "Groups": [
+                    "Students"
+                ],
+                "UserName": {
+                    "Fn::FindInMap": [
+                        "UserConfig",
+                        "Login",
+                        "Name"
+                    ]
+                }
+            }
+        }
+    }
+}
