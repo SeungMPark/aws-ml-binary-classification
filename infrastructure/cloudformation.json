@@ -9,10 +9,11 @@
     },
     "Mappings": {
         "SubnetConfig": {
-        "UserConfig": {
-            "Login": {
-                "Name": "student",
-                "Pass": "password"
+            "UserConfig": {
+                "Login": {
+                    "Name": "student",
+                    "Pass": "password"
+                }
             }
         }
     },
