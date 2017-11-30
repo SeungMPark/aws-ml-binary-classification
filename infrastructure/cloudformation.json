@@ -186,7 +186,10 @@
                                         "machinelearning:AddTags",
                                         "machinelearning:DeleteTags",
                                         "s3:Get*",
-                                        "s3:List*"
+                                        "s3:List*",
+                                        "s3:PutObjectAcl",
+                                        "s3:PutBucketAcl",
+                                        "s3:PutBucketPolicy"
                                     ],
                                     "Resource": "*",
                                     "Effect": "Allow"
