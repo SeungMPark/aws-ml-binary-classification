@@ -189,7 +189,8 @@
                                         "s3:List*",
                                         "s3:PutObjectAcl",
                                         "s3:PutBucketAcl",
-                                        "s3:PutBucketPolicy"
+                                        "s3:PutBucketPolicy",
+                                        "cloudwatch:ListMetrics"
                                     ],
                                     "Resource": "*",
                                     "Effect": "Allow"
